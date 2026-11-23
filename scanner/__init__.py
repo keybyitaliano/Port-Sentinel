@@ -1,0 +1,1 @@
+"""Port Sentinel - Escáner de puertos con contexto de riesgo y modo diff."""
