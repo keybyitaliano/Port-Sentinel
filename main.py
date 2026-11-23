@@ -28,6 +28,7 @@ BANNER_COLOR = "\033[38;5;244m"  # Gris suave para banners
 REC_COLOR = "\033[38;5;250m"     # Gris claro para recomendaciones
 HEADER_COLOR = "\033[1;35m"      # Magenta para títulos de sección
 RESET_COLOR = "\033[0m"
+COPYRIGHT_TEXT = "© 2026 keybyitaliano"
 
 
 def supports_color() -> bool:
@@ -83,8 +84,10 @@ def print_report(target: str, results: list[dict], diff: dict, use_color: bool) 
     header_title = f"\n=== Port Sentinel | Objetivo: {target} ==="
     if use_color:
         print(f"{HEADER_COLOR}{header_title}{RESET_COLOR}")
+        print(f"{BANNER_COLOR}{COPYRIGHT_TEXT}{RESET_COLOR}\n")
     else:
         print(header_title)
+        print(f"{COPYRIGHT_TEXT}\n")
 
     if not results:
         print("No se detectaron puertos abiertos que coincidan con el filtro.")
@@ -99,11 +102,11 @@ def print_report(target: str, results: list[dict], diff: dict, use_color: bool) 
                 detail_display = detail_txt
 
             risk_display = colorize_risk(item["risk_level"], use_color)
-            
+
             # Ancho de formato ajustado considerando secuencias ANSI
             print(f"{item['port']:<8} {item['service']:<12} {risk_display:<19} {detail_display}")
-            
-            rec_txt = item['recommendation']
+
+            rec_txt = item["recommendation"]
             if use_color:
                 print(f"   ↳ {REC_COLOR}{rec_txt}{RESET_COLOR}")
             else:
@@ -119,10 +122,10 @@ def print_report(target: str, results: list[dict], diff: dict, use_color: bool) 
         print("Primer escaneo guardado para este objetivo. La próxima ejecución mostrará cambios.")
     else:
         print(f"Baseline anterior: {diff.get('previous_scan_at')}")
-        
-        new_p = diff['new_ports']
-        closed_p = diff['closed_ports']
-        
+
+        new_p = diff["new_ports"]
+        closed_p = diff["closed_ports"]
+
         if use_color:
             new_str = f"\033[1;32m{new_p}\033[0m" if new_p else "Ninguno"
             closed_str = f"\033[1;31m{closed_p}\033[0m" if closed_p else "Ninguno"
@@ -132,7 +135,7 @@ def print_report(target: str, results: list[dict], diff: dict, use_color: bool) 
 
         print(f"Puertos nuevos abiertos: {new_str}")
         print(f"Puertos cerrados:        {closed_str}")
-        
+
         if diff["changed_banners"]:
             for cb in diff["changed_banners"]:
                 print(f"Banner cambiado en {cb['port']}: '{cb['old']}' -> '{cb['new']}'")
