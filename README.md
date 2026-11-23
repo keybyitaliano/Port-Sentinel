@@ -97,3 +97,5 @@ Este proyecto está distribuido bajo la licencia **MIT**. Consulta el archivo [`
 ## Aviso de uso ético
 
 Esta herramienta ha sido desarrollada exclusivamente con fines educativos, de aprendizaje y de auditoría defensiva en entornos propios o debidamente autorizados. Utilízala únicamente sobre sistemas de tu propiedad o en los que cuentes con autorización explícita y por escrito.
+
+© 2026 Agustín — Todos los derechos reservados.
